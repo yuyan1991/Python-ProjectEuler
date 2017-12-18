@@ -1,4 +1,4 @@
-# -*- config: utf-8 -*-
+# -*- coding: utf-8 -*-
 import math
 
 n=600851475143

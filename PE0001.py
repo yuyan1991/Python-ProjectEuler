@@ -1,4 +1,4 @@
-# -*- config:utf-8 -*-
+# -*- coding:utf-8 -*-
 
 ans = 0;
 for x in range(1000):

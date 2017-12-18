@@ -1,4 +1,4 @@
-# config: utf-8 -*-
+# coding: utf-8 -*-
 x=2520
 while True:
     okay=True
