@@ -10,6 +10,9 @@ for year in range(1901, 2001):
             print(year, i + 1)
     for i in range(12):
         r[i] += 1
+    if year % 4 == 0 and year % 100 != 0 or year % 400 == 0:
+        for i in range(2):
+            r[i] += 1
     if (year + 1) % 4 == 0 and (year + 1) % 100 != 0 or (year + 1) % 400 == 0:
         for i in range(2, 12):
             r[i] += 1
