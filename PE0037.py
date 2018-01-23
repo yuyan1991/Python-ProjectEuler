@@ -1,6 +1,6 @@
 # -*- coding: utf -*-
 
-maxn = 400000
+maxn = 1000000
 
 checked = [False] * (maxn + 1)
 P = []
@@ -30,7 +30,7 @@ def isTruncatePrime(p):
 	return True
 
 def solve():
-	print(P)
+	# print(P[-1])
 	ans  =0
 	cnt = 0
 	for p in P:
