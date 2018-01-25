@@ -6,6 +6,9 @@ def solve():
 	s = ''
 	for i in range(1, maxn):
 		s += str(i)
+		if len(s) > maxn:
+			print('total = ', i)
+			break
 	ans = 1
 	x = 1
 	while x <= maxn:
