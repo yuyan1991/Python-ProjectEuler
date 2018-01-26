@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-maxn = 10
+maxn = 9
 ans = 0
 checked = 0
 
@@ -23,10 +23,13 @@ def dfs(cur, ll, v):
 		if isPrime(v) and v>ans:
 			ans=v
 		return
-	for i in reversed(range(1, l+1)):
+	steps = 1
+	if cur == 1:
+		steps = 2
+	for i in reversed(range(1, l+1, steps)):
 		if checked & (1<<(i-1)) == 0:
 			checked ^= 1<<(i-1)
-			dfs(cur+1, ll, v + i*10**(ll-cur))
+			dfs(cur+1, ll, v + i*10**(cur-1))
 			checked ^= 1<<(i-1)
 
 if __name__=='__main__':
