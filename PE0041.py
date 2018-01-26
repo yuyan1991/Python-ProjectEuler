@@ -23,7 +23,7 @@ def dfs(cur, ll, v):
 		if isPrime(v) and v>ans:
 			ans=v
 		return
-	for i in range(1, l+1):
+	for i in reversed(range(1, l+1)):
 		if checked & (1<<(i-1)) == 0:
 			checked ^= 1<<(i-1)
 			dfs(cur+1, ll, v + i*10**(ll-cur))
@@ -32,4 +32,6 @@ def dfs(cur, ll, v):
 if __name__=='__main__':
 	for l in reversed(range(1, maxn)):
 		dfs(1, l, 0)
+		if ans > 0:
+			break
 	print(ans)
