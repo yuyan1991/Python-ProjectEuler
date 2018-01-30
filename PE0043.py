@@ -8,7 +8,7 @@ a = [1, 2, 3, 5, 7, 11, 13, 17]
 def dfs(cur, v, num):
 	global checked
 	global ans
-	if cur == maxn:
+	if cur > maxn:
 		print(num)
 		ans += num
 		return
