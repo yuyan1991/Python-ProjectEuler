@@ -15,7 +15,7 @@ def find(F, n):
 
 def solve(low, high):
 	T = lambda x: x*(x+1)//2
-	H = lambda x: x*(2*x-1)//2
+	H = lambda x: x*(2*x-1)
 	for i in range(low, high):
 		n = (lambda x: x*(3*x-1)//2)(i)
 		if T(find(T, n))==n and H(find(H, n))==n:
