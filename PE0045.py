@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-maxn = 1000000 + 1
+maxn = 60000 + 1
 
 def find(F, n):
 	l = 1
