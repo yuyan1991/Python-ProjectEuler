@@ -24,7 +24,10 @@ if __name__=='__main__':
 	s = 0
 	for p in P:
 		s+=p
-		S.append(p)
+		S.append(s)
+		if s>maxm:
+			break
+
 	cnt = ans = 0
 	for i in range(0, len(S)):
 		for j in range(i + cnt, len(S)):
