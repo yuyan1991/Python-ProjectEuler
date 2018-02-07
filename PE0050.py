@@ -27,8 +27,8 @@ if __name__=='__main__':
 		S.append(p)
 	cnt = ans = 0
 	for i in range(0, len(S)):
-		for j in range(i, len(S)):
-			if S[j]-S[i]+P[i]<maxm and j-i+1>cnt:
+		for j in range(i + cnt, len(S)):
+			if S[j]-S[i]+P[i]<maxm and j-i+1>cnt and not checked[S[j]-S[i]+P[i]]:
 				cnt = j-i+1
 				ans = S[j] - S[i] + P[i]
 	print("%d:%d"%(ans, cnt))
