@@ -46,8 +46,9 @@ def solve():
 					for j in range(l):
 						if i & (1<<j) > 0:
 							y = getDigit(p, j)
-							if not checked[p - y * (10**j) + x * (10**j)]:
-								cnt += 1
+							n = n - y * (10**j) + x * (10**j)
+					if not checked[n]:
+						cnt += 1
 				if cnt >= limit:
 					print(p)
 					return
