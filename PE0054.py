@@ -1073,9 +1073,9 @@ def isExactlySame(hand, numOfSameCard):
 	global rankValue
 	cnt = 0
 	for i in range(numOfCardsInHand):
-		if (i==0 or convert(hand[i])!=convert(hand[i-1])) and i + numOfSameCard - 1 < numOfCardsInHand:
+		checkCard = convert(hand[i])
+		if (i==0 or checkCard!=convert(hand[i-1])) and i + numOfSameCard - 1 < numOfCardsInHand and (i + numOfSameCard == numOfCardsInHand or convert(hand[i+numOfSameCard])!=checkCard):
 			okay = True
-			checkCard = convert(hand[i])
 			for j in range(numOfSameCard):
 				if convert(hand[i+j])!=checkCard:
 					okay = False
@@ -1134,9 +1134,10 @@ if __name__=='__main__':
 		player1 = calculateCardsValue(hand1)
 		player2 = calculateCardsValue(hand2)
 		if compare(player1, player2):
-			print('======================================================')
-			print(player1)
-			print(player2)
-			print('======================================================')
+			if player1['rank']>3:
+				print('======================================================')
+				print(player1)
+				print(player2)
+				print('======================================================')
 			ans+=1
 	print(ans)
