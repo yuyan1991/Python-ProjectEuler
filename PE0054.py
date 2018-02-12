@@ -1007,131 +1007,136 @@ games = [
 rankValue = 0
 
 def convert(card):
-    if card[0]=='T':
-        return 10
-    if card[0]=='J':
-        return 11
-    if card[0]=='Q':
-        return 12
-    if card[0]=='K':
-        return 13
-    if card[0]=='A':
-        return 14
-    return ord(card[0])-48
+	if card[0]=='T':
+		return 10
+	if card[0]=='J':
+		return 11
+	if card[0]=='Q':
+		return 12
+	if card[0]=='K':
+		return 13
+	if card[0]=='A':
+		return 14
+	return ord(card[0])-48
 
 def sortCards(hand):
-    return sorted(hand, key = convert, reverse = True)
+	return sorted(hand, key = convert, reverse = True)
 
 def isRoyalFlush(hand):
-    global rankValue
-    rankValue = convert(hand[0])
-    return isStraightFlush(hand) and hand[0][0]=='A'
+	global rankValue
+	rankValue = convert(hand[0])
+	return isStraightFlush(hand) and hand[0][0]=='A'
 
 def isStraightFlush(hand):
-    global rankValue
-    rankValue = convert(hand[0])
-    return isStraight(hand) and isFlush(hand)
+	global rankValue
+	rankValue = convert(hand[0])
+	return isStraight(hand) and isFlush(hand)
 
 def isFourOfAKind(hand):
-    global rankValue
-    rankValue = convert(hand[1])
-    return isExactlySame(hand, 4)
+	global rankValue
+	rankValue = convert(hand[1])
+	return isExactlySame(hand, 4)
 
 def isFullHouse(hand):
-    global rankValue
-    rankValue = convert(hand[2])
-    return isExactlySame(hand, 3) and isExactlySame(hand, 2)
+	global rankValue
+	rankValue = convert(hand[2])
+	return isExactlySame(hand, 3) and isExactlySame(hand, 2)
 
 def isFlush(hand):
-    global rankValue
-    rankValue = convert(hand[0])
-    for i in range(numOfCardsInHand):
-        if hand[i][1]!=hand[0][1]:
-            return False
-    return True
+	global rankValue
+	rankValue = convert(hand[0])
+	for i in range(numOfCardsInHand):
+		if hand[i][1]!=hand[0][1]:
+			return False
+	return True
 
 def isStraight(hand):
-    global rankValue
-    rankValue = convert(hand[0])
-    for i in range(numOfCardsInHand):
-        if convert(hand[i][0])!=rankValue-i:
-            return False
-    return True
+	global rankValue
+	rankValue = convert(hand[0])
+	for i in range(numOfCardsInHand):
+		if convert(hand[i][0])!=rankValue-i:
+			return False
+	return True
 
 def isThreeOfAKind(hand):
-    global rankValue
-    rankValue = convert(hand[2])
-    return isExactlySame(hand, 3)
+	global rankValue
+	rankValue = convert(hand[2])
+	return isExactlySame(hand, 3)
 
 def isTwoPairs(hand):
-    return isExactlySame(hand, 2)==2 #Exactly two pairs occurred
+	return isExactlySame(hand, 2)==2 #Exactly two pairs occurred
 
 def isOnePair(hand):
-    return isExactlySame(hand, 2)
+	return isExactlySame(hand, 2)==1
 
 def isExactlySame(hand, numOfSameCard):
-    global rankValue
-    cnt = 0
-    for i in range(numOfCardsInHand):
-        if i==0 or convert(hand[i])!=convert(hand[i-1]) and i + numOfSameCard - 1 < numOfCardsInHand:
-            okay = True
-            checkCard = convert(hand[i])
-            for j in range(numOfSameCard):
-                if convert(hand[i+j])!=checkCard:
-                    okay = False
-                    break
-            if okay:
-                cnt += 1
-                if cnt == 1:
-                    rankValue = checkCard
-    return cnt
+	global rankValue
+	cnt = 0
+	for i in range(numOfCardsInHand):
+		if (i==0 or convert(hand[i])!=convert(hand[i-1])) and i + numOfSameCard - 1 < numOfCardsInHand:
+			okay = True
+			checkCard = convert(hand[i])
+			for j in range(numOfSameCard):
+				if convert(hand[i+j])!=checkCard:
+					okay = False
+					break
+			if okay:
+				cnt += 1
+				if cnt == 1:
+					rankValue = checkCard
+	return cnt
 
 def calculateCardsValue(hand):
-    player = {'hand': hand,'rank': 0, 'rankValue': 0}
-    rankValue = 0
-    if isRoyalFlush(hand):
-        player['rank'] = 10
-    elif isStraightFlush(hand):
-        player['rank'] = 9
-    elif isFourOfAKind(hand):
-        player['rank'] = 8
-    elif isFullHouse(hand):
-        player['rank'] = 7
-    elif isFlush(hand):
-        player['rank'] = 6
-    elif isStraight(hand):
-        player['rank'] = 5
-    elif isThreeOfAKind(hand):
-        player['rank'] = 4
-    elif isTwoPairs(hand):
-        player['rank'] = 3
-    elif isOnePair(hand):
-        player['rank'] = 2
-    else:
-        player['rank'] = 1
-        rankValue = convert(player['hand'][0])
-    player['rankValue'] = rankValue
-    return player
+	player = {'hand': hand,'rank': 0, 'rankValue': 0}
+	global rankValue
+	rankValue = 0
+	if isRoyalFlush(hand):
+		player['rank'] = 10
+	elif isStraightFlush(hand):
+		player['rank'] = 9
+	elif isFourOfAKind(hand):
+		player['rank'] = 8
+	elif isFullHouse(hand):
+		player['rank'] = 7
+	elif isFlush(hand):
+		player['rank'] = 6
+	elif isStraight(hand):
+		player['rank'] = 5
+	elif isThreeOfAKind(hand):
+		player['rank'] = 4
+	elif isTwoPairs(hand):
+		player['rank'] = 3
+	elif isOnePair(hand):
+		player['rank'] = 2
+	else:
+		player['rank'] = 1
+		rankValue = convert(player['hand'][0])
+	player['rankValue'] = rankValue
+	return player
 
 def higher(hand1, hand2):
-    for i in range(numOfCardsInHand):
-        if convert(hand1[i]) > convert(hand2[i]):
-            return True
-        if convert(hand1[i]) < convert(hand2[i]):
-            return False
-    return True
+	for i in range(numOfCardsInHand):
+		if convert(hand1[i]) > convert(hand2[i]):
+			return True
+		if convert(hand1[i]) < convert(hand2[i]):
+			return False
+	return True
 
 def compare(player1, player2):
-    return player1['rank'] > player2['rank'] or player1['rank'] == player2['rank'] and player1['rankValue'] > player2['rankValue'] or player1['rank'] == player2['rank'] and player1['rankValue'] == player2['rankValue'] and higher(player1['hand'], player2['hand'])
+	return player1['rank'] > player2['rank'] or player1['rank'] == player2['rank'] and player1['rankValue'] > player2['rankValue'] or player1['rank'] == player2['rank'] and player1['rankValue'] == player2['rankValue'] and higher(player1['hand'], player2['hand'])
 
 if __name__=='__main__':
-    ans=0
-    for game in games:
-        [hand1, hand2] = game
-        hand1 = sortCards(hand1)
-        hand2 = sortCards(hand2)
-        player1 = calculateCardsValue(hand1)
-        player2 = calculateCardsValue(hand2)
-        if compare(player1, player2):
-            ans+=1
-    print(ans)
+	ans=0
+	for game in games:
+		[hand1, hand2] = game
+		hand1 = sortCards(hand1)
+		hand2 = sortCards(hand2)
+		player1 = calculateCardsValue(hand1)
+		player2 = calculateCardsValue(hand2)
+		if compare(player1, player2):
+			print('======================================================')
+			print(player1)
+			print(player2)
+			print('======================================================')
+			ans+=1
+	print(ans)
