@@ -2,7 +2,7 @@
 
 import math
 
-maxn = 10000000
+maxn = 10000
 limit = 5
 
 checked = [False] * maxn
@@ -43,7 +43,7 @@ def search(dep, cur, tot):
 		print(num)
 		return
 	for i in range(cur, cntPrime):
-		if tot + P[i] > ans:
+		if tot + P[i] * (limit - dep) > ans:
 			break
 		num[dep]=P[i]
 		okay = True
@@ -56,5 +56,5 @@ def search(dep, cur, tot):
 
 if __name__=='__main__':
 	calPrime()
-	search(0, 0, 0)
+	search(0, 1, 0)
 	print(ans)
