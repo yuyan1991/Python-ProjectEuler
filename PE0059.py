@@ -63,19 +63,18 @@ article = [
 73
 ]
 
-asciiSize = 256
 if __name__=='__main__':
-	for a in range(asciiSize):
-		for b in range(asciiSize):
-			for c in range(asciiSize):
+	for a in range(ord('a'), ord('z') + 1):
+		for b in range(ord('a'), ord('z') + 1):
+			for c in range(ord('a'), ord('z') + 1):
 				K = [a, b, c]
 				s = ''
 				ans = 0
 				for i in range(len(article)):
 					s += chr(article[i]^K[i%3])
 					ans += article[i] ^ K[i % 3]
-				if s.find("the")!=-1:
+				if s.find(" the ")!=-1:
 					print(ans)
 					print(a,b,c)
 					print(s)
-					ans = input()
+					print('====================================================================================================================')
