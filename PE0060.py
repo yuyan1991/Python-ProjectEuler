@@ -57,8 +57,11 @@ def search(dep, cur, tot):
                 break
         if okay:
             search(dep+1, i+1, tot+num[dep])
+            if ans<1<<30:
+                return
 
 if __name__=='__main__':
     calPrime()
     search(0, 1, 0)
+    print('Total number of prime', cntPrime)
     print(ans)
