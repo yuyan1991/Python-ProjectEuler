@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 maxm = 10 + 1
-maxn = 1000 + 1
+maxn = 21 + 1
 s = set()
 ans = 0
 
